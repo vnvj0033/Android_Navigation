@@ -1,3 +1,24 @@
+### Add a Destination
+
+```xml
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/home_dest">
+    <!--...-->
+    
+    <fragment
+        android:id="@+id/settings_dest"
+        android:name="com.example.android.codelabs.navigation.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/settings_fragment" />
+    
+    <!--...-->
+</navigation>
+```
+
+
 ### Navigation Graph
 ```
 destinations: 앱에서 이동할 수 있는 모든 위치, 일반적으로 Fragment나 Activity
