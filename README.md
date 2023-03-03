@@ -1,3 +1,26 @@
+### NavController
+NavController는 Navigate 명령 (NavHostFragment의 Fragment 교체)
+```
+// NavController을 가저오는 방법
+Fragment.findNavController()
+View.findNavController()
+Activity.findNavController(viewId: Int)
+```
+
+```kotlin
+// NavController을 사용해 navigate
+val button = view.findViewById<Button>(R.id.navigate_destination_button)
+button?.setOnClickListener {
+    findNavController().navigate(R.id.flow_step_one_dest, null)
+}
+//or
+val button = view.findViewById<Button>(R.id.navigate_destination_button)
+button?.setOnClickListener(
+    Navigation.createNavigateOnClickListener(R.id.flow_step_one_dest, null)
+)
+```
+
+
 ### NavHostFragment
 NavHostFragment는 Navigate 마다 Fragment로 교체<br/>
 activity xml에 fragment의 android:name로 선언<br/>
