@@ -1,3 +1,23 @@
+### NavHostFragment
+NavHostFragment는 Navigate 마다 Fragment로 교체<br/>
+activity xml에 fragment의 android:name로 선언<br/>
+app:navGraph는 NavHostFragment를 Navigation Graph와 연결
+
+```xml
+<LinearLayout>  
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/my_nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:navGraph="@navigation/mobile_navigation"
+        app:defaultNavHost="true"
+        />
+</LinearLayout>
+```
+
+
 ### Add a Destination
 
 ```xml
