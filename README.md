@@ -1,3 +1,19 @@
+### Navigate using actions
+action을 사용해서 navigation 지원
+```xml
+<fragment android:id="@+id/home_dest">
+
+    <action android:id="@+id/next_action" 
+        app:destination="@+id/flow_step_one" 
+        app:enterAnim="@anim/slide_in_right" 
+        app:exitAnim="@anim/slide_out_left" 
+        app:popEnterAnim="@anim/slide_in_left" 
+        app:popExitAnim="@anim/slide_out_right" />
+
+</fragment>
+```
+
+
 ### Navigation Transition
 ```kotlin
 val options = navOptions {
