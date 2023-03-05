@@ -1,3 +1,51 @@
+### safe args
+safe args를 사용해 Navigation의 안전한 인수 전달 기능
+```
+// build.gradle
+dependencies {
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
+    //...
+}
+
+// app/build.gradle
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+```
+
+```kotlin
+
+// 인수 전달 FlowStepFragment
+view.findViewById<Button>(R.id.navigate_action_button)?.setOnClickListener {
+    val flowStepNumberArg = 1
+    val action = HomeFragmentDirections.nextAction(flowStepNumberArg)
+    // HomeFragmentDirections는 navigation의 HomeFragment"
+    findNavController().navigate(action)
+}
+
+// 인수 수신 HomeFragment
+val safeArgs: FlowStepFragmentArgs by navArgs()
+val flowStepNumber = safeArgs.flowStepNumber
+```
+
+```xml
+<!--layout xml-->
+<fragment
+    android:id="@+id/flow_step_one_dest"
+    android:name="com.example.android.codelabs.navigation.FlowStepFragment"
+    tools:layout="@layout/flow_step_one_fragment">
+    <argument
+        android:name="flowStepNumber"
+        app:argType="integer"
+        android:defaultValue="1"/>
+
+    <action...>
+    </action>
+</fragment>
+```
+
+
+
 ### Navigate using actions
 action을 사용해서 navigation 지원
 ```xml
