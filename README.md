@@ -1,3 +1,103 @@
+### menus, drawers and bottom navigation
+옵션 메뉴
+```xml
+<!--overflow_menu.xml-->
+<item
+    android:id="@+id/settings_dest"
+    android:icon="@drawable/ic_settings"
+    android:menuCategory="secondary"
+    android:title="@string/settings" />
+```
+```kotlin
+
+// MainActivity.kt
+override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    return item.onNavDestinationSelected(findNavController(R.id.my_nav_host_fragment))
+            || super.onOptionsItemSelected(item)
+}
+```
+하단 메뉴
+```xml
+<!--navigation_activity.xml-->
+<com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/bottom_nav_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:menu="@menu/bottom_nav_menu" />
+
+
+<!--res/menu/bottom_nav_menu.xml-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@id/home_dest"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home" />
+    <item
+        android:id="@id/deeplink_dest"
+        android:icon="@drawable/ic_android"
+        android:title="@string/deeplink" />
+</menu>
+```
+```kotlin
+//MainActivity.kt
+private fun setupBottomNavMenu(navController: NavController) {
+    val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
+    bottomNav?.setupWithNavController(navController)
+}
+```
+AppBarConfiguration
+```kotlin
+//MainActivity.kt
+
+// BottomNavigationView가 아닌 NavigationView를 사용
+val sideNavView = findViewById<NavigationView>(R.id.nav_view)
+sideNavView?.setupWithNavController(navController)
+
+val drawerLayout : DrawerLayout? = findViewById(R.id.drawer_layout)
+appBarConfiguration = AppBarConfiguration(
+    setOf(R.id.home_dest, R.id.deeplink_dest),
+    drawerLayout)
+
+// 대상의 라벨에 따라 ActionBar에 제목 표시
+// 최상위 대상이 없을 때마다 위로 버튼 표시
+// 최상위 대상이 있을 때 창 아이콘(햄버거 아이콘) 표시
+setupActionBarWithNavController(navController, appBarConfig)
+
+override fun onSupportNavigateUp(): Boolean {
+    return findNavController(R.id.my_nav_host_fragment).navigateUp(appBarConfiguration)
+}
+```
+```xml
+<!--nav_drawer_menu.xml-->
+<item
+    android:id="@+id/settings_dest"
+    android:icon="@drawable/ic_settings"
+    android:title="@string/settings" />
+
+<!--navigation_activity.xml-->
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.codelabs.navigation.MainActivity">
+
+    <!--...-->
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_drawer_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>
+
+```
+
+
+
 ### safe args
 safe args를 사용해 Navigation의 안전한 인수 전달 기능
 ```
@@ -51,11 +151,11 @@ action을 사용해서 navigation 지원
 ```xml
 <fragment android:id="@+id/home_dest">
 
-    <action android:id="@+id/next_action" 
-        app:destination="@+id/flow_step_one" 
-        app:enterAnim="@anim/slide_in_right" 
-        app:exitAnim="@anim/slide_out_left" 
-        app:popEnterAnim="@anim/slide_in_left" 
+    <action android:id="@+id/next_action"
+        app:destination="@+id/flow_step_one"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right" />
 
 </fragment>
@@ -106,7 +206,7 @@ activity xml에 fragment의 android:name로 선언<br/>
 app:navGraph는 NavHostFragment를 Navigation Graph와 연결
 
 ```xml
-<LinearLayout>  
+<LinearLayout>
     <fragment
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -115,7 +215,7 @@ app:navGraph는 NavHostFragment를 Navigation Graph와 연결
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:navGraph="@navigation/mobile_navigation"
         app:defaultNavHost="true"
-        />
+    />
 </LinearLayout>
 ```
 
@@ -129,13 +229,13 @@ app:navGraph는 NavHostFragment를 Navigation Graph와 연결
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@+id/home_dest">
     <!--...-->
-    
+
     <fragment
         android:id="@+id/settings_dest"
         android:name="com.example.android.codelabs.navigation.SettingsFragment"
         android:label="@string/settings"
         tools:layout="@layout/settings_fragment" />
-    
+
     <!--...-->
 </navigation>
 ```
@@ -151,8 +251,8 @@ navigation xml
 app:startDestination은 앱을 처음 열 때 실행되는 대상
 ```xml
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@+id/home_dest">
 
     <!-- ...tags for fragments and activities here -->
