@@ -1,3 +1,19 @@
+### Deep Linking
+NavDeepLinkBuilder로 Provider에 PendingIntent생성 </br>
+navigation Version 2.5.0 이상 사용 권장 (Android 12 PendingIntent 이슈있음)
+```kotlin
+// DeepLinkAppWidgetProvider.kt
+val args = Bundle()
+args.putString("myarg", "From Widget")
+val pendingIntent = NavDeepLinkBuilder(context)
+        .setGraph(R.navigation.mobile_navigation)
+        .setDestination(R.id.deeplink_dest)
+        .setArguments(args)
+        .createPendingIntent()
+
+remoteViews.setOnClickPendingIntent(R.id.deep_link_button, pendingIntent)
+```
+
 ### menus, drawers and bottom navigation
 옵션 메뉴
 ```xml
