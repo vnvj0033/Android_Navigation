@@ -24,8 +24,8 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:menu="@menu/bottom_nav_menu" />
-
-
+```
+```xml
 <!--res/menu/bottom_nav_menu.xml-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
@@ -73,7 +73,8 @@ override fun onSupportNavigateUp(): Boolean {
     android:id="@+id/settings_dest"
     android:icon="@drawable/ic_settings"
     android:title="@string/settings" />
-
+```
+```xml
 <!--navigation_activity.xml-->
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -93,7 +94,6 @@ override fun onSupportNavigateUp(): Boolean {
         android:layout_gravity="start"
         app:menu="@menu/nav_drawer_menu" />
 </androidx.drawerlayout.widget.DrawerLayout>
-
 ```
 
 
@@ -250,9 +250,8 @@ navigation xml
 <navigation>에는 <activity> 또는 <fragment> 요소로 표시된 대상이 하나 이상 포함</br>
 app:startDestination은 앱을 처음 열 때 실행되는 대상
 ```xml
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation 
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@+id/home_dest">
 
     <!-- ...tags for fragments and activities here -->
