@@ -68,7 +68,7 @@ class DeepLinkFragment : Fragment() {
             }
 
             val builder = NotificationCompat.Builder(
-                    context!!, "deeplink")
+                    requireContext(), "deeplink")
                     .setContentTitle("Navigation")
                     .setContentText("Deep link to Android")
                     .setSmallIcon(R.drawable.ic_android)
