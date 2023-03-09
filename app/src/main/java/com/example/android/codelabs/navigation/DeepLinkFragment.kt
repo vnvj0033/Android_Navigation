@@ -53,7 +53,7 @@ class DeepLinkFragment : Fragment() {
         notificationButton.setOnClickListener {
             val editArgs = view.findViewById<EditText>(R.id.args_edit_text)
             val args = Bundle()
-            args.putString("myarg", editArgs.getText().toString())
+            args.putString("myarg", editArgs.text.toString())
 
             val deeplink = findNavController().createDeepLink()
                     .setDestination(R.id.deeplink_dest)
