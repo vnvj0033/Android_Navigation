@@ -13,7 +13,7 @@ val pendingIntent = NavDeepLinkBuilder(context)
 
 remoteViews.setOnClickPendingIntent(R.id.deep_link_button, pendingIntent)
 ```
-웹에 연결
+웹에 연결 ex) www.example.com/myarg
 ```xml
 <!--mobile_navigation.xml-->
 <fragment
