@@ -13,6 +13,34 @@ val pendingIntent = NavDeepLinkBuilder(context)
 
 remoteViews.setOnClickPendingIntent(R.id.deep_link_button, pendingIntent)
 ```
+웹에 연결
+```xml
+<!--mobile_navigation.xml-->
+<fragment
+    android:id="@+id/deeplink_dest"
+    android:name="com.example.android.codelabs.navigation.DeepLinkFragment"
+    android:label="@string/deeplink"
+    tools:layout="@layout/deeplink_fragment">
+
+    <argument
+        android:name="myarg"
+        android:defaultValue="Android!"/>
+
+    <deepLink app:uri="www.example.com/{myarg}" />
+</fragment>
+```
+```xml
+<!--AndroidManifest.xml-->
+<activity android:name=".MainActivity">
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+
+    <nav-graph android:value="@navigation/mobile_navigation" />
+</activity>
+```
 
 ### menus, drawers and bottom navigation
 옵션 메뉴
