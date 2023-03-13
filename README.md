@@ -1,3 +1,41 @@
+### App link
+navigation의 deepLink 태그로 앱 링크 실행</br>
+(Android 12 이상 관련하여 App link 실행 제한 이슈 발생 : https://developer.android.com/training/app-links/verify-android-applinks)
+```xml
+<!--mobile_navigation.xml-->
+<navigation
+    app:startDestination="@+id/home_dest">
+    
+    <fragment
+        android:id="@+id/deeplink_dest"
+        android:name="com.example.android.codelabs.navigation.DeepLinkFragment"
+        android:label="@string/deeplink"
+        tools:layout="@layout/deeplink_fragment">
+
+        <argument
+            android:name="myarg"
+            android:defaultValue="Android!"/>
+
+        <deepLink app:uri="www.example.com/{myarg}"/>
+    </fragment>
+
+</navigation>
+```
+```xml
+<!--manifests.xml-->
+<activity android:name=".MainActivity"
+    android:exported="true">
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+
+    <nav-graph android:value="@navigation/mobile_navigation" />
+</activity>
+```
+
 ### Deep Linking
 NavDeepLinkBuilder로 Provider에 PendingIntent생성 </br>
 navigation Version 2.5.0 이상 사용 권장 (Android 12 PendingIntent 이슈있음)
